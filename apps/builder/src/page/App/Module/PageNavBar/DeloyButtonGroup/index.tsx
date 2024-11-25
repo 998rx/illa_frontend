@@ -42,19 +42,19 @@ export const DeployButtonGroup: FC<DeployButtonGroupProps> = (props) => {
   } = props
 
   if (!isCloudVersion || isGuideMode) {
-    return (
-      <Button
-        loading={loading}
-        colorScheme="techPurple"
-        size="medium"
-        leftIcon={<PlayFillIcon />}
-        onClick={onClickDeploy}
-      >
-        {isGuideMode
-          ? t("editor.tutorial.panel.tutorial.modal.fork")
-          : t("deploy")}
-      </Button>
-    )
+    // return (
+    //   <Button
+    //     loading={loading}
+    //     colorScheme="techPurple"
+    //     size="medium"
+    //     leftIcon={<PlayFillIcon />}
+    //     onClick={onClickDeploy}
+    //   >
+    //     {isGuideMode
+    //       ? t("editor.tutorial.panel.tutorial.modal.fork")
+    //       : t("deploy")}
+    //   </Button>
+    // )
   }
 
   return (

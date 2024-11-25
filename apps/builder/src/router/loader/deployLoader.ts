@@ -24,6 +24,7 @@ export const deployLoader: LoaderFunction = async (args) => {
     )
 
     const isPublic = publicStateResponse.data.isPublic
+    // const isPublic = true
     if (isPublic) {
       const userInfo = await tryFetchUserInfo()
       if (userInfo) {

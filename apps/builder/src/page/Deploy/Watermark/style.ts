@@ -2,6 +2,7 @@ import { css } from "@emotion/react"
 import { getColor } from "@illa-design/react"
 
 export const deployLogoStyle = css`
+  display: none !important;
   position: absolute;
   bottom: 16px;
   right: 16px;

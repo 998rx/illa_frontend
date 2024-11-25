@@ -18,6 +18,10 @@ export const fetchAPPPublicStatus = async (
   teamIdentifier?: string,
   signal?: AbortSignal,
 ) => {
+
+  // 直接返回 { isPublic: true }
+  // return { data: { isPublic: true } };
+
   return builderRequest<IAPPPublicStatus>(
     {
       url: `/publicApps/${appID}/isPublic`,

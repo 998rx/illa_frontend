@@ -1,0 +1,31 @@
+FROM ubuntu:20.04 AS builder
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+RUN sed -i 's|http://.*.ubuntu.com|http://mirrors.tuna.tsinghua.edu.cn|g' /etc/apt/sources.list && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends curl git tar make && \
+    curl -sL --insecure https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y --no-install-recommends nodejs && \
+    apt-get autoremove -y && apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN npm install -g pnpm@8.7.0
+
+COPY illa-builder /illa
+
+WORKDIR /illa
+
+RUN git submodule init && git submodule update && pnpm install
+
+COPY apps apps
+
+RUN pnpm build-self
+
+RUN cd apps/builder && mv dist builder && tar -cf /root/builder.tar builder && \
+    cd ../cloud && mv dist cloud && tar -cf /root/cloud.tar cloud
+
+FROM ubuntu:20.04
+COPY --from=builder /root/builder.tar /app/builder.tar
+COPY --from=builder /root/cloud.tar /app/cloud.tar
+CMD ["sh", "-c", "echo 'GRAB YOUR FILES IN /app !'; tail -f /dev/null"]

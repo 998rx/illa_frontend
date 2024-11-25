@@ -53,5 +53,5 @@ const wrappedRouter = (
 }
 
 export const ILLARoute = createBrowserRouter(wrappedRouter(routerConfig), {
-  basename: import.meta.env.ILLA_BASE_PATH ?? "/",
+  basename: import.meta.env.ILLA_BASE_PATH ?? "/build",
 })

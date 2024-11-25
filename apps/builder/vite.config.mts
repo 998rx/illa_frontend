@@ -93,7 +93,7 @@ export default defineConfig(({ command, mode }) => {
   writeFileSync("./public/appInfo.json", `{"version":${version}}`)
 
   return {
-    base: env.ILLA_BASE_PATH ?? "/",
+    base: env.ILLA_BASE_PATH ?? "/build",
     plugins: plugin,
     esbuild: {
       logOverride: { "this-is-undefined-in-esm": "silent" },
